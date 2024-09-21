@@ -1,12 +1,14 @@
 const express = require('express');
 const upload = require('../multer');
 const router = express.Router();
-const {getPets} = require("./pets.controllers")
+const {getPets, addPet, getPet, deletePet} = require("./pets.controllers")
 router.route("/")
     .get(getPets)
+    .post(upload.single("image"), addPet)
 
-
-
+router.route("/:id")
+    .get(getPet)
+    .delete(deletePet)
 
 
 

@@ -10,6 +10,39 @@ const getPets = async(req, res)=>{
         
     }
 }
+const getPet = async(req, res)=>{
+    try {
+        const {id} = req.params
+        const pet = await petSchema.findById(id)
+        return res.status(201).json({data: pet})
+    } catch (error) {
+        return res.status(500).json({error: error})
+        
+    }
+}
+
+const addPet = async(req, res)=>{
+    try {
+        if(req.file){
+            req.body.image = req.file
+        }
+        const newPet = await petSchema.create(req.body)
+        return res.status(201).json({data: newPet})
+    } catch (error) {
+        return res.status(500).json({error: error})
+        
+    }
+}
+const deletePet = async(req, res)=>{
+    try {
+        const {id} = req.params
+        const pets = await petSchema.findByIdAndDelete(id)
+        return res.status(201).json({data: pets})
+    } catch (error) {
+        return res.status(500).json({error: error})
+        
+    }
+}
 
 
 
@@ -18,9 +51,7 @@ const getPets = async(req, res)=>{
 
 
 
-
-
-module.exports = {getPets}
+module.exports = {getPets, addPet, getPet, deletePet}
 
 // REFRENCE ⬇️
 
