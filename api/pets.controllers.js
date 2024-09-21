@@ -4,7 +4,7 @@ const petSchema = require("../models/petShema");
 const getPets = async(req, res)=>{
     try {
         const pets = await petSchema.find()
-        return res.status(200).json({data: pets})
+        return res.status(200).json(pets)
     } catch (error) {
         return res.status(500).json({error: error})
         
@@ -14,7 +14,7 @@ const getPet = async(req, res)=>{
     try {
         const {id} = req.params
         const pet = await petSchema.findById(id)
-        return res.status(201).json({data: pet})
+        return res.status(201).json(pet)
     } catch (error) {
         return res.status(500).json({error: error})
         
@@ -24,13 +24,25 @@ const getPet = async(req, res)=>{
 const addPet = async(req, res)=>{
     try {
         if(req.file){
-            req.body.image = req.file
+            req.body.image = req.file.filename
+            console.log(req.body)
         }
         const newPet = await petSchema.create(req.body)
-        return res.status(201).json({data: newPet})
+        return res.status(201).json(newPet)
     } catch (error) {
         return res.status(500).json({error: error})
         
+    }
+}
+const editPet = async(req, res)=>{
+    try {
+        const {id} = req.params
+        const pet = await petSchema.findByIdAndUpdate(id, req.body)
+        return res.status(200).json(pet)
+        
+    } catch (error) {
+        
+        return res.status(500).json({error: error})
     }
 }
 const deletePet = async(req, res)=>{
@@ -51,7 +63,7 @@ const deletePet = async(req, res)=>{
 
 
 
-module.exports = {getPets, addPet, getPet, deletePet}
+module.exports = {getPets, addPet, getPet, editPet, deletePet}
 
 // REFRENCE ⬇️
 

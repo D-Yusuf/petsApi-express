@@ -1,5 +1,5 @@
 const { model, Schema } = require('mongoose');
-
+const a = "a"
 
   const petSchema = new Schema({
     name: {
@@ -8,13 +8,14 @@ const { model, Schema } = require('mongoose');
     },
     type: {
       type: String,
+      set: v=> v.split('').map((char, i)=> i == 0 ? char.toUpperCase() : char.toLowerCase()).join(''),
       required: true,
     },
     adopted: {
       type: Boolean,
       default: false,
     },
-    petImage: {
+    image: {
       type: String, 
     },
     age: {
