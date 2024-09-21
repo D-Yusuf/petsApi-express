@@ -6,6 +6,8 @@ const morgan = require('morgan');
 const cors = require("cors")
 const notFoundHandler = require('./middleware/notFoundHandler');
 const errorHandler = require('./middleware/errorHandler');
+
+const petsRouter = require("./api/pets.routes")
 require("dotenv").config()
 connectDb();
 app.use(express.json());
@@ -13,7 +15,7 @@ app.use(cors())
 app.use(morgan("dev"))
 
 
-app.use('/api/<path>', "<routes>");
+app.use('/api/pets', petsRouter);
 
 // use if u want to see images in browser-> localhost:PORT/media/...imgUrl
 // app.use("media", express.static(path.join(__dirname, "/media")))

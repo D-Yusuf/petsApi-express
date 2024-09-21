@@ -1,4 +1,15 @@
-const x = require("../models/xShema");
+const petSchema = require("../models/petShema");
+
+
+const getPets = async(req, res)=>{
+    try {
+        const pets = await petSchema.find()
+        return res.status(200).json({data: pets})
+    } catch (error) {
+        return res.status(500).json({error: error})
+        
+    }
+}
 
 
 
@@ -9,10 +20,7 @@ const x = require("../models/xShema");
 
 
 
-
-
-
-
+module.exports = {getPets}
 
 // REFRENCE ⬇️
 

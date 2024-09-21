@@ -1,6 +1,9 @@
 const express = require('express');
-const upload = require('../../multer');
+const upload = require('../multer');
 const router = express.Router();
+const {getPets} = require("./pets.controllers")
+router.route("/")
+    .get(getPets)
 
 
 
@@ -8,10 +11,7 @@ const router = express.Router();
 
 
 
-
-
-
-
+module.exports = router
 // REFRENCE ⬇️
 
 // const { postsGet, postsUpdate, postsDelete, postsCreate } = require('./posts.controllers');

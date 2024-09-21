@@ -1,7 +1,27 @@
 const { model, Schema } = require('mongoose');
 
-const x = new Schema({
-  name: {type: String, default: "Anonymous"}
-});
 
-module.exports = model('X', x);
+  const petSchema = new Schema({
+    name: {
+      type: String,
+      required: true,
+    },
+    type: {
+      type: String,
+      required: true,
+    },
+    adopted: {
+      type: Boolean,
+      default: false,
+    },
+    petImage: {
+      type: String, 
+    },
+    age: {
+      type: Number,
+    }
+  }, { timestamps: true });
+  
+  const Pet = model('Pet', petSchema);
+  module.exports = Pet;
+  
